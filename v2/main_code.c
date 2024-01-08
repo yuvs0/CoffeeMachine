@@ -1,45 +1,31 @@
-/* DJS 12/02/18 ***********************************************************/
-// Originally adapted from LCD.c by DW Smith, 25 January 2012 for 18F45K20 LCD BSc PD&T
-// E on D7, RS on D6,  D4-7 on PIC: D0-3.
-// V7 DJS 10/2019 V8 DJS 18/02/21 Changed Message Tidied Up
-// MCLRE = OFF SO PROG WILL RUN IN RELEASE
-// 04/03/21 DJS added CG Capability write Custom Graphics Caracters to LCD initially
-// THEN to the screen 04/03/21 REVISED DJS V4 15/10/21 checked 13/10/23 DJS
-//*************************************************************************/
-
-
-
 #pragma config FOSC = INTIO67
 #pragma config WDTEN = OFF, LVP = OFF, MCLRE = OFF
-//#pragma udata //declare statically allocated uninitialized variables
-//unsigned int topRowChar;
-//unsigned int bottomRowChar;
 
-
+#pragma udata   // declare statically allocated uinitialized variables, we may not need this
 
 #include "p18f45k20.h"
+#include "08 Interrupts.h"
 
 #include <delays.h>
 
-#pragma interrupt isr	// declares isr as my interrupt (service) routine.
-
+//Define commands for LCD
 #define CLEAR_SCREEN  	0b00000001
 #define FOUR_BIT  		0b00101100
 #define LINES_5X7  		0b00111000
 #define CURSOR_BLINK  	0b00001111
 #define CURSOR_RIGHT  	0b00000110
 
-#define CUP_FULL 15//ENUMS from I2C input
+//Define commands from ESP32
+#define CUP_FULL 15
 #define RESET 16
 #define ERROR_CUP_PRESENT_ON_STARTUP 17
 #define CUP_PRESENT 18
-
 
 #define DATA_PORT  LATD
 #define RS_PIN     PORTDbits.RD6
 #define E_PIN      PORTDbits.RD7
 #define STIRRER_MOTOR PORTBbits.RB0
-#define DOOR_CONTACT PORTBbits.RB1//Change this out for the correct pin
+#define DOOR_CONTACT PORTBbits.RB1//Change this out for the correct pin, leave RB0 free for the interrupt pin
 #define CLEAN_BTN PORTBbits.RB2//Change this out for the correct pin
 #define LIMIT_SWITCH PORTBbits.RB3//Change this out for the correct pin
 
@@ -59,7 +45,21 @@ int ESPinput = 0;
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
 
+/** I N T E R R U P T S ***********************************************/
 
+//----------------------------------------------------------------------------
+// High priority interrupt vector
+
+#pragma code InterruptVectorHigh = 0x08
+void InterruptVectorHigh (void)
+{
+  _asm
+    goto InterruptServiceHigh //jump to interrupt routine
+  _endasm
+}
+
+/** D E C L A R A T I O N S *******************************************/
+#pragma code    // declare executable instructions
 
 void Delay5milli(void)							//Suitable delay for LCD
 {
@@ -67,7 +67,7 @@ void Delay5milli(void)							//Suitable delay for LCD
 }
 
 
-
+//DEFINE LCD SUBROUTINES---------------------------------------------------------
 
 void SetAddr(unsigned char DDaddr)
 {
@@ -140,6 +140,7 @@ void WriteChar(char data)
         return;
 }
        
+//DEFINE STEPPER MOTOR SUBROUTINES-----------------------------------------------
 
 
 void stepperForward(void){
@@ -160,6 +161,8 @@ void stepperOff(void){
 void drawWaterGraphic(int i){
 
 }
+
+//DEFINE PROGRAM SUBROUTINES---------------------------------------------------
 
 void mainMenu(void){
 	mainMenuVar = 1;
@@ -243,47 +246,10 @@ void clean(void){
 	
 }
 
-
-#pragma code isr = 0x08		//Define the Interrupt Service Routine
-void isr(void)
-{
-	if(ESPinput<15){//If it's a water level update
-		drawWaterGraphic(ESPinput);
-	} else if(ESPinput>18){//If it's a user ID
-		userID = ESPinput;
-		if(mainMenuVar == 1){
-			mainMenu();//If it's already on the main menu, reset the main menu to display the new user name.
-		}
-	} else{//If it's a command from the ESP
-		switch(ESPinput){
-			case RESET://If the cup is full
-				resetSystem();
-				break;
-			case ERROR_CUP_PRESENT_ON_STARTUP://The cup is present when the ESP starts up
-				WriteCmd ( CLEAR_SCREEN );    
-				SetAddr (0x80); 
-				WriteString("Please remove cup");
-				break;
-			case CUP_PRESENT://The user has inserted a cup
-				cupPresent = 1;
-				break;
-			case CUP_FULL://Stop plunging if the cup is full
-				stepperOff();
-				plunging = 0;
-				WriteCmd ( CLEAR_SCREEN );    
-				SetAddr (0x80); 
-				WriteString("Please remove the cup");
-				break;
-		}
-	}
-
-}
-#pragma code
-
 void main (void)
 {
 
-//SET UP
+//SET UP PINS-------------------------------------------------------------------------------
 
    
 
@@ -296,18 +262,27 @@ void main (void)
 	TRISC  = 0b00000000;                 		
    	LATC   = 0b00000000;	                	   	
 	TRISD  = 0b00000000;                 		//sets PORTd
-   	LATD   = 0b00000000;	                	//turns off PORTd outputs, good start position   	
+   	LATD   = 0b00000000;	                	//turns off PORTd outputs, good start position   
 
-	// this code configures the display  
- 	
-	WriteCmd ( 0x02 );							// sets 4bit operation
-	WriteCmd ( CLEAR_SCREEN);		
-	WriteCmd ( FOUR_BIT & LINES_5X7 );			// sets 5x7 and multiline operation.
-	WriteCmd ( CURSOR_BLINK );					// blinks cursor
-	WriteCmd ( CURSOR_RIGHT  );					// moves cursor right	
+//SET UP INTERRUPTS-------------------------------------------------------------------------
 
+	INTCON2bits.RBPU = 0;		// enable PORTB internal pullups
+	WPUBbits.WPUB0 = 1;			// enable pull up on RB0
 
- // this code configures the display  
+    // ADCON1 is now set up in the InitADC() function.
+    TRISBbits.TRISB0 = 1;       // PORTB bit 0 (connected to switch) is input (1)
+
+    // Set up switch interrupt on INT0
+    INTCON2bits.INTEDG0 = 0;    // interrupt on falling edge of INT0 (switch pressed)
+    INTCONbits.INT0IF = 0;      // ensure flag is cleared
+    INTCONbits.INT0IE = 1;      // enable INT0 interrupt
+
+	// Set up global interrupts
+    RCONbits.IPEN = 1;          // Enable priority levels on interrupts
+    INTCONbits.GIEL = 1;        // Low priority interrupts allowed
+    INTCONbits.GIEH = 1;        // Interrupting enabled.
+
+//CONFIGURE DISPLAY-------------------------------------------------------------------------
   
 	WriteCmd ( 0x02 );							// sets 4bit operation
 	WriteCmd ( CLEAR_SCREEN);		
@@ -405,19 +380,54 @@ void main (void)
 	
 	
 
-// Start of user program
-WriteCmd ( CLEAR_SCREEN );    
-SetAddr (0x80); 
+//SYSTEM START--------------------------------------------------------------------------
+	WriteCmd ( CLEAR_SCREEN );    
+	SetAddr (0x80); 
 	WriteString("STARTUP");
-	while(systemReady = 0){
-//Wait until the system has been reset
+	while(systemReady == 0){
+		//Wait here until the system has been reset
+	}
+	
+	//We won't need the main function again, so it doesn't loop.
+		
 }
 
 
 
-	   
-    //SetAddr (0xC0);                             // moves character to begining of second line
-    
-while (1);				                 		//stop the program - Loop here forever
-	
+// -------------------- Interrupt Service Routine --------------------------------------
+#pragma interrupt InterruptServiceHigh  // "interrupt" pragma also for high priority
+void InterruptServiceHigh(void)
+{
+	if(ESPinput<15){//If it's a water level update
+		drawWaterGraphic(ESPinput);
+	} else if(ESPinput>18){//If it's a user ID
+		userID = ESPinput;
+		if(mainMenuVar == 1){
+			mainMenu();//If it's already on the main menu, reset the main menu to display the new user name.
+		}
+	} else{//If it's a command from the ESP
+		switch(ESPinput){
+			case RESET://If the cup is full
+				resetSystem();
+				break;
+			case ERROR_CUP_PRESENT_ON_STARTUP://The cup is present when the ESP starts up
+				WriteCmd ( CLEAR_SCREEN );    
+				SetAddr (0x80); 
+				WriteString("Please remove cup");
+				break;
+			case CUP_PRESENT://The user has inserted a cup
+				cupPresent = 1;
+				break;
+			case CUP_FULL://Stop plunging if the cup is full
+				stepperOff();
+				plunging = 0;	//This stops the machine from plunging if it is already plunging.
+				WriteCmd ( CLEAR_SCREEN );    
+				SetAddr (0x80); 
+				WriteString("Please remove the cup");
+				break;
+		}
+	}
+	// clear (reset) flag
+    INTCONbits.INT0IF = 0;
+
 }
