@@ -21,6 +21,8 @@
 
 #include <delays.h>
 
+#pragma interrupt isr	// declares isr as my interrupt (service) routine.
+
 #define CLEAR_SCREEN  	0b00000001
 #define FOUR_BIT  		0b00101100
 #define LINES_5X7  		0b00111000
@@ -241,8 +243,10 @@ void clean(void){
 	
 }
 
-void interruptRoutine(void){
-	
+
+#pragma code isr = 0x08		//Define the Interrupt Service Routine
+void isr(void)
+{
 	if(ESPinput<15){//If it's a water level update
 		drawWaterGraphic(ESPinput);
 	} else if(ESPinput>18){//If it's a user ID
@@ -272,7 +276,10 @@ void interruptRoutine(void){
 				break;
 		}
 	}
+
 }
+#pragma code
+
 void main (void)
 {
 
