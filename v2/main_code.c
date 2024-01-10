@@ -1,3 +1,17 @@
+/*----------------------------------
+THINGS TO DO BEFORE RUNNING ON THE MACHINE
+
+IN THIS CODE:
+-Properly integrate the I2C code
+-Set the correct pins (they're just placeholder values at the moment)
+-Measure the number of steps it takes for the plunger to go from Reset to fully plunged. Set maxPlungeSteps to this value.
+-Set correct usernames to match with face ID module ID numbers
+
+ON THE ESP32:
+-Measure the distance measured when the sensor is mounted but no cup is present. Set the correct variable to this value.
+
+*/
+
 #pragma config FOSC = INTIO67
 #pragma config WDTEN = OFF, LVP = OFF, MCLRE = OFF
 
@@ -29,6 +43,10 @@
 #define CLEAN_BTN PORTBbits.RB2//Change this out for the correct pin
 #define LIMIT_SWITCH PORTBbits.RB3//Change this out for the correct pin
 
+//Define stepper motor pins
+#define DIR_PIN PORTDbits.RD0//Change to correct pin
+#define STEP_PIN PORTDbits.RD1//Change to correct pin
+
 //#pragma romdata topRowChar = 0x180
 const rom unsigned char topRowChar[14] = {0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x5F, 0x03, 0x04, 0x05, 0x06, 0x07, 0xFF};//The list of custom characters for he top row when th cup is filling
 const rom unsigned char bottomRowChar[14] = {0x5F, 0x03, 0x04, 0x05, 0x06, 0x07, 0xFF,0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};//The list of custom characters for he top row when th cup is filling
@@ -44,6 +62,7 @@ int userID = 0;
 int ESPinput = 0;
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
+int maxPlungeSteps = 1000;//The number of steps the motor takes to get from Reset to fully plunged
 
 /** I N T E R R U P T S ***********************************************/
 
@@ -144,25 +163,39 @@ void WriteChar(char data)
 
 
 void stepperForward(void){
+	//Take one step
+	LATDbits.LATD0 = 0;			
+	Delay1KTCYx(5);
+	LATDbits.LATD0 = 1;			
+	Delay1KTCYx(5);
+}
+
+/*void stepperBackward(void){
 	//Reverse the stepper motor
-	//
-}
+	
+}*/
 
-void stepperBackward(void){
+/*void stepperOff(void){
 	//Reverse the stepper motor
-	//
-}
-
-void stepperOff(void){
-	//Reverse the stepper motor
-	//
-}
-
-void drawWaterGraphic(int i){
-
-}
+	LATDbits.LATD0 = 0;//Check this is correct!
+}*/
 
 //DEFINE PROGRAM SUBROUTINES---------------------------------------------------
+
+void drawWaterGraphic(int i){
+	WriteCmd ( CLEAR_SCREEN );    
+	SetAddr (0x80);
+	WriteChar(0x00);
+	WriteChar(topRowChar[i]);
+	WriteChar(topRowChar[i]);
+	WriteChar(0x01);
+
+	SetAddr (0xC0);
+	WriteChar(0x00);
+	WriteChar(bottomRowChar[i]);
+	WriteChar(bottomRowChar[i]);
+	WriteChar(0x02);
+}
 
 void mainMenu(void){
 	mainMenuVar = 1;
@@ -182,11 +215,11 @@ void resetSystem(void){
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
 	WriteString("Resetting");
-	stepperBackward();
-	while(LIMIT_SWITCH == 0){
-		//Wait until the motor feels resistance
+	DIR_PIN = 0;//Set the direction to backward
+	while(LIMIT_SWITCH == 0){	//Until the Aeropress reaches the top and presses the lilit switch...
+		stepperForward();	//Take one step
 	}
-	stepperOff();
+	//stepperOff();
 	systemReady = 1;
 	mainMenu();
 }
@@ -196,9 +229,10 @@ void makeCoffee(void){
 	if(systemReady == 1){
 		plunging = 1;
 		systemReady = 0;
-		stepperForward();
-		Delay10KTCYx(50);//Swap this out for however long it takes the plunger to seal the top of the chamber.
-		stepperOff();
+		DIR_PIN = 1;	//Set the stepper motor direction to forward
+		for(i=0; i<1000; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
+			stepperForward();
+		}
 		STIRRER_MOTOR = 1;
 
 		WriteCmd ( CLEAR_SCREEN );    
@@ -208,15 +242,12 @@ void makeCoffee(void){
 		Delay10KTCYx(brewTime);//IMPORTANT: Multiply this by something to turn it into seconds!
 		STIRRER_MOTOR = 0;
 		drawWaterGraphic(0);//Draw an empty cup
-		stepperForward();
-		for(i=0; i<1000; i++){//Replace 1000 with the number of ticks it takes to fully plunge the mechanism.
-			if(plunging == 0){//This For loop is a fail-safe, in case the interrupt to stop the plunging never happens. It's also used for the cleaning function, where it plunges the whole way without filling a cup.
-				i=1000;//Replace with the number from the For loop.
-				Delay10KTCYx(10);//Wait 10 counts before checking again
+		for(i=0; i<maxPlungeSteps; i++){//Replace 1000 with the number of ticks it takes to fully plunge the mechanism.
+			stepperForward();	//Take one step
+			if(plunging == 0){	//This For loop is a fail-safe, in case the interrupt to stop the plunging never happens. It's also used for the cleaning function, where it plunges the whole way without filling a cup.
+				i=maxPlungeSteps;	//Replace with the number from the For loop.
 			}
-		}
-		stepperOff();
-			
+		}		
 	}
 }
 
@@ -226,7 +257,7 @@ void doorClosed(void){
 		makeCoffee();
 		WriteCmd ( CLEAR_SCREEN );    
 		SetAddr (0x80); 
-		WriteString("Please remove cup");//This will display until the system resets itself, indictaing the cup has been removed.
+		WriteString("Remove cup");//This will display until the system resets itself, indictaing the cup has been removed.
 	}
 }
 
@@ -235,7 +266,12 @@ void clean(void){
 	while(CLEAN_BTN == 0){
 		//Wait for the user to let go of Clean
 	}
-	WriteString("Insert a tablet, close the door and press Clean again");
+	WriteCmd ( CLEAR_SCREEN );    
+	SetAddr (0x80);
+	WriteString("Insert a tablet,");
+	SetAddr (0xC0);
+	WriteString("press Clean");
+
 	while(CLEAN_BTN == 0){
 		//Wait until Clean is pressed again
 	}
@@ -301,78 +337,80 @@ void main (void)
 	WriteChar ( 0x07 );
 
 	WriteCmd  ( 0x40 );							// WRITING TO LCD MEMORY
-	WriteCmd  ( 0b00001011);	//display off
-	WriteChar ( 0b00000000 );					// first character
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00011111 );
+	WriteCmd  ( 0b00001011);					//display off
+	WriteChar ( 0b00000001 );					// first character
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
+	WriteChar ( 0b00000001 );
 
-	WriteChar ( 0b00000000 );					// second character
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00011111 );
-	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00010000 );					// second character
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00011110 );
+	WriteChar ( 0b00010010 );
+	WriteChar ( 0b00010010 );
+	WriteChar ( 0b00010010 );
 
-	WriteChar ( 0b00000000 );					// third character
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00011111 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00010010 );					// third character
+	WriteChar ( 0b00010010 );
+	WriteChar ( 0b00010010 );
+	WriteChar ( 0b00011110 );
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00010000 );
+	WriteChar ( 0b00010000 );
 
 	WriteChar ( 0b00000000 );					// fourth character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+
+	WriteChar ( 0b00000000 );					// fifth character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+
+	WriteChar ( 0b00000000 );					// fifth character
+	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+
 
 	WriteChar ( 0b00000000 );					// fifth character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00011111 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
 
-	WriteChar ( 0b00000000 );					// sixth character
+
+	WriteChar ( 0b00000000 );					// fifth character
+	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00011111 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-
-	WriteChar ( 0b00000000 );					// seventh character
 	WriteChar ( 0b00011111 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-
-	WriteChar ( 0b00011111 );					// eigth character
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
-	WriteChar ( 0b00000000 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
+	WriteChar ( 0b00011111 );
 
 	WriteCmd  ( 0b00001100);	//display back on
 	WriteCmd  ( CLEAR_SCREEN);     
@@ -383,7 +421,7 @@ void main (void)
 //SYSTEM START--------------------------------------------------------------------------
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
-	WriteString("STARTUP");
+	WriteString("Loading...");
 	while(systemReady == 0){
 		//Wait here until the system has been reset
 	}
@@ -413,17 +451,17 @@ void InterruptServiceHigh(void)
 			case ERROR_CUP_PRESENT_ON_STARTUP://The cup is present when the ESP starts up
 				WriteCmd ( CLEAR_SCREEN );    
 				SetAddr (0x80); 
-				WriteString("Please remove cup");
+				WriteString("Remove cup");
 				break;
 			case CUP_PRESENT://The user has inserted a cup
 				cupPresent = 1;
 				break;
 			case CUP_FULL://Stop plunging if the cup is full
-				stepperOff();
+				//stepperOff();
 				plunging = 0;	//This stops the machine from plunging if it is already plunging.
 				WriteCmd ( CLEAR_SCREEN );    
 				SetAddr (0x80); 
-				WriteString("Please remove the cup");
+				WriteString("Remove cup");
 				break;
 		}
 	}
