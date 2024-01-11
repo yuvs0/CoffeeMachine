@@ -1,0 +1,65 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: 3.60.00.00
+## FORMAT:  v2.00.01
+## DEVICE:  PIC18F45K20
+
+## PINREGACTIONS
+cyc
+No Repeat
+--
+&
+## ADVPINREGACTIONS
+--
+&
+--
+COND1
+Any
+
+
+
+
+
+
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+&
+## RESPONSEFILE
+&
+## ASYNCH
+Pin
+RB0
+Toggle
+
+Interrupt pin
+-1
+--
+Pin
+RB3
+Set High
+
+Limit switch
+-1
+--
+Pin
+RB1
+Set High
+
+Door contact
+-1
+--
+Pin
+RB2
+Toggle
+
+CLEAN_BTN
+-1
+--
+&
+## ADVANCEDSCL
+
+0
+&

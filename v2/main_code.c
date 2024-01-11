@@ -21,6 +21,7 @@ ON THE ESP32:
 #include "08 Interrupts.h"
 
 #include <delays.h>
+#include <string.h>	//Used for debugging LCD in MPLAB SIM
 
 //Define commands for LCD
 #define CLEAR_SCREEN  	0b00000001
@@ -38,7 +39,7 @@ ON THE ESP32:
 #define DATA_PORT  LATD
 #define RS_PIN     PORTDbits.RD6
 #define E_PIN      PORTDbits.RD7
-#define STIRRER_MOTOR PORTBbits.RB0
+#define STIRRER_MOTOR PORTBbits.RB4
 #define DOOR_CONTACT PORTBbits.RB1//Change this out for the correct pin, leave RB0 free for the interrupt pin
 #define CLEAN_BTN PORTBbits.RB2//Change this out for the correct pin
 #define LIMIT_SWITCH PORTBbits.RB3//Change this out for the correct pin
@@ -57,12 +58,16 @@ int cupPresent = 0;
 int plunging = 0;
 int brewTime = 0;
 int motorResistance = 0;
-int systemReady = 0;
+int systemReady = 0;//Return to 0 after debugging!
 int userID = 0;
-int ESPinput = 0;
+int ESPinput = 0;	//Set to 0 before releasing
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
 int maxPlungeSteps = 1000;//The number of steps the motor takes to get from Reset to fully plunged
+int makingCoffee = 0;
+
+//char LCDdebug = "a";
+int debugState = 1;
 
 /** I N T E R R U P T S ***********************************************/
 
@@ -216,7 +221,8 @@ void resetSystem(void){
 	SetAddr (0x80); 
 	WriteString("Resetting");
 	DIR_PIN = 0;//Set the direction to backward
-	while(LIMIT_SWITCH == 0){	//Until the Aeropress reaches the top and presses the lilit switch...
+	//LIMIT_SWITCH = 1;
+	while(PORTBbits.RB3 == 0){	//Until the Aeropress reaches the top and presses the limit switch...
 		stepperForward();	//Take one step
 	}
 	//stepperOff();
@@ -233,21 +239,26 @@ void makeCoffee(void){
 		for(i=0; i<1000; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
 			stepperForward();
 		}
-		STIRRER_MOTOR = 1;
+		if(makingCoffee == 1){	//Don't brew if it's cleaning
+			STIRRER_MOTOR = 1;
 
-		WriteCmd ( CLEAR_SCREEN );    
-		SetAddr (0x80); 
-		WriteString("Brewing...");
+			WriteCmd ( CLEAR_SCREEN );    
+			SetAddr (0x80); 
+			WriteString("Brewing...");
 
-		Delay10KTCYx(brewTime);//IMPORTANT: Multiply this by something to turn it into seconds!
-		STIRRER_MOTOR = 0;
-		drawWaterGraphic(0);//Draw an empty cup
+			Delay10KTCYx(brewTime);//IMPORTANT: Multiply this by something to turn it into seconds!
+			STIRRER_MOTOR = 0;
+			drawWaterGraphic(0);//Draw an empty cup
+		}
 		for(i=0; i<maxPlungeSteps; i++){//Replace 1000 with the number of ticks it takes to fully plunge the mechanism.
 			stepperForward();	//Take one step
 			if(plunging == 0){	//This For loop is a fail-safe, in case the interrupt to stop the plunging never happens. It's also used for the cleaning function, where it plunges the whole way without filling a cup.
 				i=maxPlungeSteps;	//Replace with the number from the For loop.
 			}
-		}		
+		}	
+		if(makingCoffee == 0){	//If the user is cleaning, don't wait for the cup to be removed
+			resetSystem();
+		}	
 	}
 }
 
@@ -263,20 +274,24 @@ void doorClosed(void){
 
 void clean(void){
 	mainMenuVar = 0;
-	while(CLEAN_BTN == 0){
-		//Wait for the user to let go of Clean
+	while(CLEAN_BTN == 1){
+		//Wait for the user to let go of Clean, so it doesn't skip the instruction screen
 	}
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80);
 	WriteString("Insert a tablet,");
 	SetAddr (0xC0);
 	WriteString("press Clean");
-
+	if(DOOR_CONTACT == 0){	//If the door is open
+		WriteCmd ( CLEAR_SCREEN );    
+		SetAddr (0x80);
+		WriteString("Close door");
+		while(DOOR_CONTACT == 0){
+			//Wait for the door to be closed
+		}
+	}
 	while(CLEAN_BTN == 0){
 		//Wait until Clean is pressed again
-	}
-	while(DOOR_CONTACT == 0){
-		//Wait for the door to be closed
 	}
 	makeCoffee();
 	
@@ -285,15 +300,19 @@ void clean(void){
 void main (void)
 {
 
+//SET VARIABLES FOR DEBUG SESSION- DELETE BEFORE FINAL RELEASE!-----------------------------
+
+
+
 //SET UP PINS-------------------------------------------------------------------------------
 
    
 
    	ANSEL  = 0;	                        	    //turn off all analog inputs
 	ANSELH = 0; 
-	TRISA  = 0b00000000;                 		
-   	LATA   = 0b00000000;	                	
-	TRISB  = 0b00000000;                 		
+	TRISA  = 0b00000000;                 		//Sets inputs and outputs
+   	LATA   = 0b00000000;	                	//Turns off all pins on port A
+	TRISB  = 0b00001111;                 		
    	LATB   = 0b11100000;	                	
 	TRISC  = 0b00000000;                 		
    	LATC   = 0b00000000;	                	   	
@@ -425,7 +444,20 @@ void main (void)
 	while(systemReady == 0){
 		//Wait here until the system has been reset
 	}
-	
+	while(1){
+		while(systemReady == 0){
+		//Wait here until the system has been reset
+		}
+		//Wait for an interrupt
+		if(CLEAN_BTN == 1){
+			clean();
+		}
+		if(cupPresent == 1 && systemReady == 1 && DOOR_CONTACT == 1){
+			makingCoffee = 1;
+			makeCoffee();
+			makingCoffee = 0;
+		}
+	}
 	//We won't need the main function again, so it doesn't loop.
 		
 }
@@ -437,7 +469,9 @@ void main (void)
 void InterruptServiceHigh(void)
 {
 	if(ESPinput<15){//If it's a water level update
-		drawWaterGraphic(ESPinput);
+		if(makingCoffee == 1){
+			drawWaterGraphic(ESPinput);
+		}
 	} else if(ESPinput>18){//If it's a user ID
 		userID = ESPinput;
 		if(mainMenuVar == 1){
