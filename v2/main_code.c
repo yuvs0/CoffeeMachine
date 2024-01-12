@@ -39,14 +39,16 @@ ON THE ESP32:
 #define DATA_PORT  LATD
 #define RS_PIN     PORTDbits.RD6
 #define E_PIN      PORTDbits.RD7
-#define STIRRER_MOTOR PORTBbits.RB4
+
+
+#define STIRRER_MOTOR PORTAbits.RA4
 #define DOOR_CONTACT PORTBbits.RB1//Change this out for the correct pin, leave RB0 free for the interrupt pin
-#define CLEAN_BTN PORTBbits.RB2//Change this out for the correct pin
-#define LIMIT_SWITCH PORTBbits.RB3//Change this out for the correct pin
+#define CLEAN_BTN PORTBbits.RB2
+#define LIMIT_SWITCH PORTBbits.RB3
 
 //Define stepper motor pins
-#define DIR_PIN PORTDbits.RD0//Change to correct pin
-#define STEP_PIN PORTDbits.RD1//Change to correct pin
+#define DIR_PIN PORTAbits.RA6
+#define STEP_PIN PORTAbits.RA5
 
 //#pragma romdata topRowChar = 0x180
 const rom unsigned char topRowChar[14] = {0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x5F, 0x03, 0x04, 0x05, 0x06, 0x07, 0xFF};//The list of custom characters for he top row when th cup is filling
@@ -58,12 +60,12 @@ int cupPresent = 0;
 int plunging = 0;
 int brewTime = 0;
 int motorResistance = 0;
-int systemReady = 0;//Return to 0 after debugging!
+int systemReady = 1;//Return to 0 after debugging!
 int userID = 0;
 int ESPinput = 0;	//Set to 0 before releasing
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
-int maxPlungeSteps = 1000;//The number of steps the motor takes to get from Reset to fully plunged
+int maxPlungeSteps = 150;//The number of steps the motor takes to get from Reset to fully plunged
 int makingCoffee = 0;
 
 //char LCDdebug = "a";
@@ -169,9 +171,9 @@ void WriteChar(char data)
 
 void stepperForward(void){
 	//Take one step
-	LATDbits.LATD0 = 0;			
+	STEP_PIN = 0;			
 	Delay1KTCYx(5);
-	LATDbits.LATD0 = 1;			
+	STEP_PIN = 1;			
 	Delay1KTCYx(5);
 }
 
@@ -222,7 +224,7 @@ void resetSystem(void){
 	WriteString("Resetting");
 	DIR_PIN = 0;//Set the direction to backward
 	//LIMIT_SWITCH = 1;
-	while(PORTBbits.RB3 == 0){	//Until the Aeropress reaches the top and presses the limit switch...
+	while(LIMIT_SWITCH == 0){	//Until the Aeropress reaches the top and presses the limit switch...
 		stepperForward();	//Take one step
 	}
 	//stepperOff();
@@ -236,7 +238,7 @@ void makeCoffee(void){
 		plunging = 1;
 		systemReady = 0;
 		DIR_PIN = 1;	//Set the stepper motor direction to forward
-		for(i=0; i<1000; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
+		for(i=0; i<150; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
 			stepperForward();
 		}
 		if(makingCoffee == 1){	//Don't brew if it's cleaning
@@ -441,6 +443,7 @@ void main (void)
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
 	WriteString("Loading...");
+	//resetSystem();	//REMOVE AFTER TESTING!!!
 	while(systemReady == 0){
 		//Wait here until the system has been reset
 	}
