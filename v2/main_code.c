@@ -3,7 +3,6 @@ THINGS TO DO BEFORE RUNNING ON THE MACHINE
 
 IN THIS CODE:
 -Properly integrate the I2C code
--Set the correct pins (they're just placeholder values at the moment)
 -Measure the number of steps it takes for the plunger to go from Reset to fully plunged. Set maxPlungeSteps to this value.
 -Set correct usernames to match with face ID module ID numbers
 
@@ -11,9 +10,19 @@ ON THE ESP32:
 -Measure the distance measured when the sensor is mounted but no cup is present. Set the correct variable to this value.
 
 */
-
-#pragma config FOSC = INTIO67
-#pragma config WDTEN = OFF, LVP = OFF, MCLRE = OFF
+#pragma config FOSC = INTIO67, FCMEN = OFF, IESO = OFF                      // CONFIG1H
+#pragma config PWRT = OFF, BOREN = OFF, BORV = 30                           // CONFIG2L
+#pragma config WDTEN = OFF, WDTPS = 32768                                    // CONFIG2H
+#pragma config MCLRE = ON, LPT1OSC = OFF, PBADEN = ON, CCP2MX = PORTC       // CONFIG3H
+#pragma config STVREN = ON, LVP = OFF, XINST = OFF                          // CONFIG4L
+#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF                   // CONFIG5L
+#pragma config CPB = OFF, CPD = OFF                                         // CONFIG5H
+#pragma config WRT0 = OFF, WRT1 = OFF, WRT2 = OFF, WRT3 = OFF               // CONFIG6L
+#pragma config WRTB = OFF, WRTC = OFF, WRTD = OFF                           // CONFIG6H
+#pragma config EBTR0 = OFF, EBTR1 = OFF, EBTR2 = OFF, EBTR3 = OFF           // CONFIG7L
+#pragma config EBTRB = OFF                                                  // CONFIG7H
+/*#pragma config FOSC = INTIO67
+#pragma config WDTEN = OFF, LVP = OFF, MCLRE = OFF*/
 
 #pragma udata   // declare statically allocated uinitialized variables, we may not need this
 
@@ -22,6 +31,10 @@ ON THE ESP32:
 
 #include <delays.h>
 #include <string.h>	//Used for debugging LCD in MPLAB SIM
+#include <stdlib.h>
+
+//#include <iostream>
+//#include <std>
 
 //Define commands for LCD
 #define CLEAR_SCREEN  	0b00000001
@@ -42,7 +55,6 @@ ON THE ESP32:
 
 
 #define STIRRER_MOTOR PORTAbits.RA4
-#define DOOR_CONTACT PORTBbits.RB1//Change this out for the correct pin, leave RB0 free for the interrupt pin
 #define CLEAN_BTN PORTBbits.RB2
 #define LIMIT_SWITCH PORTBbits.RB3
 
@@ -54,22 +66,34 @@ ON THE ESP32:
 const rom unsigned char topRowChar[14] = {0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x5F, 0x03, 0x04, 0x05, 0x06, 0x07, 0xFF};//The list of custom characters for he top row when th cup is filling
 const rom unsigned char bottomRowChar[14] = {0x5F, 0x03, 0x04, 0x05, 0x06, 0x07, 0xFF,0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};//The list of custom characters for he top row when th cup is filling
 const rom unsigned int brewTimeList[8] = {10,20,30,40,50,60,70,80};
-const rom unsigned char username[8] = {"Eddie", "Luke", "Yuvraj", "Zander", "Darren", "Oz", "Glynn", "Guest 1"};
+//const rom unsigned char username[8] = {"Eddie\x00", "Luke", "Yuvraj", "Zander", "Darren", "Oz", "Glynn", "Guest 1"};
+
+const rom char username0[] = "Eddie";
+const rom char username1[] = "Luke";
+const rom char username2[] = "Yuvraj";
+const rom char username3[] = "Zander";
+const rom char username4[] = "Darren";
+const rom char username5[] = "Oz";
+const rom char username6[] = "Glynn";
+const rom char username7[] = "Guest 1";
+
+const rom char *usernames[8] = {&username0, &username1, &username2, &username3, &username4, &username5, &username6, &username7};
 
 int cupPresent = 0;
 int plunging = 0;
 int brewTime = 0;
 int motorResistance = 0;
-int systemReady = 1;//Return to 0 after debugging!
+int systemReady = 0;//Return to 0 after debugging!
 int userID = 0;
 int ESPinput = 0;	//Set to 0 before releasing
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
-int maxPlungeSteps = 150;//The number of steps the motor takes to get from Reset to fully plunged
+int maxPlungeSteps = 150;//The number of steps the motor takes to get from sealed to fully plunged
+int stepsToSeal = 100;//Steps to take the plunger from Home to sealing the chamber
 int makingCoffee = 0;
-
-//char LCDdebug = "a";
-int debugState = 1;
+char brewTimeAsChar = "";
+char Buffer[16];
+char brewTimeBuffer[2];
 
 /** I N T E R R U P T S ***********************************************/
 
@@ -165,6 +189,12 @@ void WriteChar(char data)
         }
         return;
 }
+
+void WriteInt(int input){
+//ONLY validated with two-digit integers
+	WriteChar((input / 10) +48);
+	WriteChar((input % 10) +48);
+}
        
 //DEFINE STEPPER MOTOR SUBROUTINES-----------------------------------------------
 
@@ -177,15 +207,6 @@ void stepperForward(void){
 	Delay1KTCYx(5);
 }
 
-/*void stepperBackward(void){
-	//Reverse the stepper motor
-	
-}*/
-
-/*void stepperOff(void){
-	//Reverse the stepper motor
-	LATDbits.LATD0 = 0;//Check this is correct!
-}*/
 
 //DEFINE PROGRAM SUBROUTINES---------------------------------------------------
 
@@ -210,10 +231,10 @@ void mainMenu(void){
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
 	WriteString("User: ");
-	WriteString(username[userID]);//Write the user's name
+	WriteString(usernames[0]);//Write the user's name
 	SetAddr (0xC0);//Go to second line
 	WriteString("Brew time: ");
-	WriteString(brewTime);
+	WriteInt(brewTimeList[0]);
 	WriteString(" s");
 	
 }
@@ -223,11 +244,9 @@ void resetSystem(void){
 	SetAddr (0x80); 
 	WriteString("Resetting");
 	DIR_PIN = 0;//Set the direction to backward
-	//LIMIT_SWITCH = 1;
 	while(LIMIT_SWITCH == 0){	//Until the Aeropress reaches the top and presses the limit switch...
 		stepperForward();	//Take one step
 	}
-	//stepperOff();
 	systemReady = 1;
 	mainMenu();
 }
@@ -238,7 +257,10 @@ void makeCoffee(void){
 		plunging = 1;
 		systemReady = 0;
 		DIR_PIN = 1;	//Set the stepper motor direction to forward
-		for(i=0; i<150; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
+		WriteCmd ( CLEAR_SCREEN );    
+		SetAddr (0x80); 
+		WriteString("Please wait");
+		for(i=0; i<stepsToSeal; i++){//Swap this out for however long it takes the plunger to seal the top of the chamber.
 			stepperForward();
 		}
 		if(makingCoffee == 1){	//Don't brew if it's cleaning
@@ -247,12 +269,18 @@ void makeCoffee(void){
 			WriteCmd ( CLEAR_SCREEN );    
 			SetAddr (0x80); 
 			WriteString("Brewing...");
+			for(i=0; i<(brewTimeList[userID]); i++){
+				Delay1KTCYx(250);
+			}
 
-			Delay10KTCYx(brewTime);//IMPORTANT: Multiply this by something to turn it into seconds!
 			STIRRER_MOTOR = 0;
 			drawWaterGraphic(0);//Draw an empty cup
+		} else {
+			WriteCmd ( CLEAR_SCREEN );    
+			SetAddr (0x80); 
+			WriteString("Cleaning...");
 		}
-		for(i=0; i<maxPlungeSteps; i++){//Replace 1000 with the number of ticks it takes to fully plunge the mechanism.
+		for(i=0; i<maxPlungeSteps; i++){
 			stepperForward();	//Take one step
 			if(plunging == 0){	//This For loop is a fail-safe, in case the interrupt to stop the plunging never happens. It's also used for the cleaning function, where it plunges the whole way without filling a cup.
 				i=maxPlungeSteps;	//Replace with the number from the For loop.
@@ -261,16 +289,6 @@ void makeCoffee(void){
 		if(makingCoffee == 0){	//If the user is cleaning, don't wait for the cup to be removed
 			resetSystem();
 		}	
-	}
-}
-
-void doorClosed(void){
-	mainMenuVar = 0;
-	if(cupPresent == 1){
-		makeCoffee();
-		WriteCmd ( CLEAR_SCREEN );    
-		SetAddr (0x80); 
-		WriteString("Remove cup");//This will display until the system resets itself, indictaing the cup has been removed.
 	}
 }
 
@@ -284,14 +302,7 @@ void clean(void){
 	WriteString("Insert a tablet,");
 	SetAddr (0xC0);
 	WriteString("press Clean");
-	if(DOOR_CONTACT == 0){	//If the door is open
-		WriteCmd ( CLEAR_SCREEN );    
-		SetAddr (0x80);
-		WriteString("Close door");
-		while(DOOR_CONTACT == 0){
-			//Wait for the door to be closed
-		}
-	}
+
 	while(CLEAN_BTN == 0){
 		//Wait until Clean is pressed again
 	}
@@ -443,7 +454,7 @@ void main (void)
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
 	WriteString("Loading...");
-	//resetSystem();	//REMOVE AFTER TESTING!!!
+	resetSystem();	//REMOVE AFTER TESTING!!!
 	while(systemReady == 0){
 		//Wait here until the system has been reset
 	}
@@ -454,14 +465,17 @@ void main (void)
 		//Wait for an interrupt
 		if(CLEAN_BTN == 1){
 			clean();
+			/*makingCoffee = 1;//Remove!
+			makeCoffee();//Remove!
+			makingCoffee = 0;//Remove!*/
 		}
-		if(cupPresent == 1 && systemReady == 1 && DOOR_CONTACT == 1){
+		if(cupPresent == 1 && systemReady == 1){
 			makingCoffee = 1;
 			makeCoffee();
 			makingCoffee = 0;
 		}
 	}
-	//We won't need the main function again, so it doesn't loop.
+	
 		
 }
 

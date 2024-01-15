@@ -1,5 +1,5 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Fri Jan 12 15:51:39 2024
+Linker Map File - Created Mon Jan 15 00:20:37 2024
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -8,34 +8,45 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
            .code___init.o       code   0x000006    program   0x000002
       InterruptVectorHigh       code   0x000008    program   0x000006
                    .cinit    romdata   0x00000e    program   0x00000e
-        .code_main_code.o       code   0x00001c    program   0x000864
-               _cinit_scn       code   0x000880    program   0x00009e
-             .stringtable    romdata   0x00091e    program   0x00009a
-     .romdata_main_code.o    romdata   0x0009b8    program   0x000034
-             D10KTCYXCODE       code   0x0009ec    program   0x00002e
-              D1KTCYXCODE       code   0x000a1a    program   0x000020
-                    .code       code   0x000a3a    program   0x000020
-             _startup_scn       code   0x000a5a    program   0x00001c
-         .romdata_c018i.o    romdata   0x000a76    program   0x000000
-     .idata_main_code.o_i    romdata   0x000a76    program   0x000018
-        .romdata___init.o    romdata   0x000a76    program   0x000000
-        .idata___init.o_i    romdata   0x000a8e    program   0x000000
-            .code_c018i.o       code   0x000a8e    program   0x000000
-         .idata_c018i.o_i    romdata   0x000a8e    program   0x000000
+        .code_main_code.o       code   0x00001c    program   0x0008fa
+               _cinit_scn       code   0x000916    program   0x00009e
+             .stringtable    romdata   0x0009b4    program   0x000077
+     .romdata_main_code.o    romdata   0x000a2b    program   0x00005d
+                     PROG       code   0x000a88    program   0x00004c
+         .code_fxd1616u.o       code   0x000ad4    program   0x00002c
+              D1KTCYXCODE       code   0x000b00    program   0x000020
+                    .code       code   0x000b20    program   0x000020
+             _startup_scn       code   0x000b40    program   0x00001c
+         .romdata_c018i.o    romdata   0x000b5c    program   0x000000
+     .idata_main_code.o_i    romdata   0x000b5c    program   0x000029
+        .romdata___init.o    romdata   0x000b5c    program   0x000000
+      .romdata_fxd1616u.o    romdata   0x000b5c    program   0x000000
+        .idata___init.o_i    romdata   0x000b85    program   0x000000
+      .idata_fxd1616u.o_i    romdata   0x000b85    program   0x000000
+         .idata_c018i.o_i    romdata   0x000b85    program   0x000000
+            .code_c018i.o       code   0x000b86    program   0x000000
 .config_300001_main_code.o    romdata   0x300001    program   0x000001
+.config_300002_main_code.o    romdata   0x300002    program   0x000001
 .config_300003_main_code.o    romdata   0x300003    program   0x000001
 .config_300005_main_code.o    romdata   0x300005    program   0x000001
 .config_300006_main_code.o    romdata   0x300006    program   0x000001
-                MATH_DATA      udata   0x000000       data   0x000002
-                DELAYDAT2      udata   0x000002       data   0x000001
-                DELAYDAT1      udata   0x000003       data   0x000001
-                 .tmpdata      udata   0x000004       data   0x000000
-       .idata_main_code.o      idata   0x000060       data   0x000018
-           .udata_c018i.o      udata   0x000078       data   0x00000a
-           .idata_c018i.o      idata   0x000082       data   0x000000
-       .udata_main_code.o      udata   0x000082       data   0x000000
-          .udata___init.o      udata   0x000082       data   0x000000
-          .idata___init.o      idata   0x000082       data   0x000000
+.config_300008_main_code.o    romdata   0x300008    program   0x000001
+.config_300009_main_code.o    romdata   0x300009    program   0x000001
+.config_30000a_main_code.o    romdata   0x30000a    program   0x000001
+.config_30000b_main_code.o    romdata   0x30000b    program   0x000001
+.config_30000c_main_code.o    romdata   0x30000c    program   0x000001
+.config_30000d_main_code.o    romdata   0x30000d    program   0x000001
+                MATH_DATA      udata   0x000000       data   0x000010
+                 .tmpdata      udata   0x000010       data   0x000002
+                DELAYDAT1      udata   0x000012       data   0x000001
+       .idata_main_code.o      idata   0x000060       data   0x000029
+       .udata_main_code.o      udata   0x000089       data   0x000012
+           .udata_c018i.o      udata   0x00009b       data   0x00000a
+           .idata_c018i.o      idata   0x0000a5       data   0x000000
+        .udata_fxd1616u.o      udata   0x0000a5       data   0x000000
+        .idata_fxd1616u.o      idata   0x0000a5       data   0x000000
+          .udata___init.o      udata   0x0000a5       data   0x000000
+          .idata___init.o      idata   0x0000a5       data   0x000000
                    .stack      udata   0x000400       data   0x000100
             SFR_UNBANKED0      udata   0x000f77       data   0x000089
 
@@ -44,88 +55,100 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000a8d      
-                            0x300001    0x300001      
-                            0x300003    0x300003      
+                            0x000000    0x000b84      
+                            0x300001    0x300003      
                             0x300005    0x300006      
-            2706 out of 33048 program addresses used, program memory utilization is 8%
+                            0x300008    0x30000d      
+            2960 out of 33048 program addresses used, program memory utilization is 8%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   D10K_1   0x0009f8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                    D10Kl   0x000a04    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                    D10Kx   0x0009f6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                    D1K_1   0x000a26    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000a24    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-             Delay10KTCYx   0x0009ec    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-              Delay1KTCYx   0x000a1a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-              Delay5milli   0x00001c    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-     InterruptServiceHigh   0x00071e    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-      InterruptVectorHigh   0x000008    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                  SetAddr   0x000028    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                WriteChar   0x0000a4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 WriteCmd   0x000068    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              WriteString   0x0000e0    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-       _D10KTCYXCODE_0010   0x0009fc    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-       _D10KTCYXCODE_001C   0x000a08    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-        _D1KTCYXCODE_0010   0x000a2a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000a30    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                   D1616S   0x000aaa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                D1616SNEG   0x000ab8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                 D1616SOK   0x000ab4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                  D1616SX   0x000aca    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                    D1K_1   0x000b0c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x000b0a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                  DA1616S   0x000a9a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+              Delay1KTCYx   0x000b00    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+              Delay5milli   0x00001c    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 FXD1616S   0x000a88    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                 FXD1616U   0x000ad4    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616u.c
+     InterruptServiceHigh   0x0007ae    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+      InterruptVectorHigh   0x000008    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                  SetAddr   0x000028    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                WriteChar   0x0000a4    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 WriteCmd   0x000068    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 WriteInt   0x000128    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              WriteString   0x0000e0    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+        _D1KTCYXCODE_0010   0x000b10    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x000b16    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
        ___return_lbl00000   0x00000c    program     static                          
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x000a74    program     static                          
-       ___return_lbl00002   0x00091c    program     static                          
-               __config_0   0x300001    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_1   0x300003    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_2   0x300005    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_3   0x300006    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+       ___return_lbl00000   0x000afe    program     static                          
+       ___return_lbl00001   0x000b5a    program     static                          
+       ___return_lbl00002   0x0009b2    program     static                          
+               __config_0   0x300001    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_1   0x300002    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __config_10   0x30000d    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_2   0x300003    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_3   0x300005    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_4   0x300006    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_5   0x300008    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_6   0x300009    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_7   0x30000a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_8   0x30000b    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_9   0x30000c    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
                    __init   0x000006    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
-               __string_0   0x0009b2    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_1   0x0009ad    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_10   0x000971    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_11   0x000967    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_12   0x00095c    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_13   0x000951    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_14   0x000940    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_15   0x000934    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_16   0x000929    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_17   0x00091e    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_2   0x0009a6    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_3   0x00099f    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_4   0x000998    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_5   0x000995    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_6   0x00098f    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_7   0x000987    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_8   0x000980    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_9   0x000974    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-            __zero_memory   0x000a3a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                _do_cinit   0x000880    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+              __string_10   0x000a17    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_11   0x000a14    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_12   0x000a0a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_13   0x0009fe    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_14   0x0009f3    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_15   0x0009e7    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_16   0x0009d6    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_17   0x0009ca    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_18   0x0009bf    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_19   0x0009b4    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __string_8   0x000a2a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __string_9   0x000a23    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+            __zero_memory   0x000b20    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                _do_cinit   0x000916    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                 _startup   0x000a5a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-            bottomRowChar   0x0009c6    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-             brewTimeList   0x0009d4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                    clean   0x0003c2    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                compare_l   0x000a50    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                copy_loop   0x0008f2    program     static                          
-            copy_one_byte   0x0008f8    program     static                          
-                     done   0x00091c    program     static                          
-             done_copying   0x000906    program     static                          
-               doorClosed   0x000390    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-         drawWaterGraphic   0x000142    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                     loop   0x000a6a    program     static                          
-                   loop_h   0x000a48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                   loop_l   0x000a52    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     main   0x00042e    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 mainMenu   0x0001fe    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               makeCoffee   0x0002d0    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              resetSystem   0x000296    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-           stepperForward   0x000128    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                     test   0x00089a    program     static                          
-               topRowChar   0x0009b8    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 username   0x0009e4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               zero_block   0x000a48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 _startup   0x000b40    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+            bottomRowChar   0x000a39    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+             brewTimeList   0x000a47    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                    clean   0x00047e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                compare_l   0x000b36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                copy_loop   0x000988    program     static                          
+            copy_one_byte   0x00098e    program     static                          
+                     done   0x0009b2    program     static                          
+             done_copying   0x00099c    program     static                          
+         drawWaterGraphic   0x0001b2    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                  endloop   0x000afa    program     static                          
+                     loop   0x000b50    program     static                          
+                     loop   0x000ade    program     static                          
+                   loop_h   0x000b2e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   loop_l   0x000b38    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     main   0x0004c4    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 mainMenu   0x00026e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               makeCoffee   0x00033e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              resetSystem   0x000304    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           stepperForward   0x000198    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                     test   0x000930    program     static                          
+               topRowChar   0x000a2b    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username0   0x000a57    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username1   0x000a5d    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username2   0x000a62    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username3   0x000a69    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username4   0x000a70    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username5   0x000a77    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username6   0x000a7a    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username7   0x000a80    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               zero_block   0x000b2e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ADCON0   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                ADCON0bits   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ADCON1   0x000fc1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -144,6 +167,7 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                   BAUDCTL   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               BAUDCTLbits   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                       BSR   0x000fe0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   Buffer   0x000089       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
                   CCP1CON   0x000fbd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CCP1CONbits   0x000fbd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   CCP2CON   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -174,8 +198,7 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                  DDRDbits   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      DDRE   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  DDREbits   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-            DelayCounter1   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd1.asm
-            DelayCounter2   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd2.asm
+            DelayCounter1   0x000012       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd1.asm
                   ECCP1AS   0x000fb6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               ECCP1ASbits   0x000fb6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     EEADR   0x000fa9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -184,7 +207,7 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                EECON1bits   0x000fa6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    EECON2   0x000fa7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    EEDATA   0x000fa8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 ESPinput   0x00006c       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 ESPinput   0x00007c       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
                      FSR0   0x000fe9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR0H   0x000fea       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR0L   0x000fe9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -336,23 +359,45 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                      WPUB   0x000f7c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  WPUBbits   0x000f7c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      WREG   0x000fe8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 __AARGB0   0x000009       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB1   0x000008       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB2   0x000007       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB3   0x000006       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB4   0x000005       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB5   0x000004       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB6   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB7   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                   __AEXP   0x00000a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __BARGB0   0x00000e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB1   0x00000d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB2   0x00000c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB3   0x00000b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                   __BEXP   0x00000f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
                 __FPFLAGS   0x000001       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
             __FPFLAGSbits   0x000001       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-                 brewTime   0x000064       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               cupPresent   0x000060       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                curr_byte   0x00007b       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-               curr_entry   0x00007d       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                 data_ptr   0x00007f       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-               debugState   0x000076       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                        i   0x00006e       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              mainMenuVar   0x000070       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-             makingCoffee   0x000074       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-           maxPlungeSteps   0x000072       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-          motorResistance   0x000066       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 plunging   0x000062       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                     prom   0x000078       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-              systemReady   0x000068       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                   userID   0x00006a       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                  __REMB0   0x000005       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB1   0x000004       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB2   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB3   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __tmp_0   0x000010       data     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 brewTime   0x000074       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           brewTimeAsChar   0x000088       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           brewTimeBuffer   0x000099       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               cupPresent   0x000070       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                curr_byte   0x00009e       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+               curr_entry   0x0000a0       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                 data_ptr   0x0000a2       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                        i   0x00007e       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              mainMenuVar   0x000080       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+             makingCoffee   0x000086       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           maxPlungeSteps   0x000082       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+          motorResistance   0x000076       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 plunging   0x000072       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                     prom   0x00009b       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+              stepsToSeal   0x000084       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              systemReady   0x000078       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                   userID   0x00007a       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                usernames   0x000060       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
 
 
 
@@ -362,109 +407,143 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                    _entry   0x000000    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
        ___return_lbl00000   0x000004    program     static                          
                    __init   0x000006    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\stdclib\__init.c
-      InterruptVectorHigh   0x000008    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+      InterruptVectorHigh   0x000008    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
        ___return_lbl00000   0x00000c    program     static                          
-              Delay5milli   0x00001c    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                  SetAddr   0x000028    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 WriteCmd   0x000068    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                WriteChar   0x0000a4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              WriteString   0x0000e0    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-           stepperForward   0x000128    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-         drawWaterGraphic   0x000142    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 mainMenu   0x0001fe    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              resetSystem   0x000296    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               makeCoffee   0x0002d0    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               doorClosed   0x000390    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                    clean   0x0003c2    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                     main   0x00042e    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-     InterruptServiceHigh   0x00071e    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                _do_cinit   0x000880    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     test   0x00089a    program     static                          
-                copy_loop   0x0008f2    program     static                          
-            copy_one_byte   0x0008f8    program     static                          
-             done_copying   0x000906    program     static                          
-                     done   0x00091c    program     static                          
-       ___return_lbl00002   0x00091c    program     static                          
-              __string_17   0x00091e    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_16   0x000929    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_15   0x000934    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_14   0x000940    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_13   0x000951    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_12   0x00095c    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_11   0x000967    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              __string_10   0x000971    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_9   0x000974    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_8   0x000980    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_7   0x000987    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_6   0x00098f    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_5   0x000995    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_4   0x000998    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_3   0x00099f    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_2   0x0009a6    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_1   0x0009ad    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __string_0   0x0009b2    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               topRowChar   0x0009b8    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-            bottomRowChar   0x0009c6    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-             brewTimeList   0x0009d4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 username   0x0009e4    program     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-             Delay10KTCYx   0x0009ec    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                    D10Kx   0x0009f6    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                   D10K_1   0x0009f8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-       _D10KTCYXCODE_0010   0x0009fc    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-                    D10Kl   0x000a04    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-       _D10KTCYXCODE_001C   0x000a08    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d10ktcyx.asm
-              Delay1KTCYx   0x000a1a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000a24    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-                    D1K_1   0x000a26    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0010   0x000a2a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000a30    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
-            __zero_memory   0x000a3a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-               zero_block   0x000a48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                   loop_h   0x000a48    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                compare_l   0x000a50    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                   loop_l   0x000a52    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 _startup   0x000a5a    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                     loop   0x000a6a    program     static                          
-       ___return_lbl00001   0x000a74    program     static                          
-               __config_0   0x300001    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_1   0x300003    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_2   0x300005    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               __config_3   0x300006    program     static C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              Delay5milli   0x00001c    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                  SetAddr   0x000028    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 WriteCmd   0x000068    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                WriteChar   0x0000a4    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              WriteString   0x0000e0    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 WriteInt   0x000128    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           stepperForward   0x000198    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+         drawWaterGraphic   0x0001b2    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 mainMenu   0x00026e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              resetSystem   0x000304    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               makeCoffee   0x00033e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                    clean   0x00047e    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                     main   0x0004c4    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+     InterruptServiceHigh   0x0007ae    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                _do_cinit   0x000916    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     test   0x000930    program     static                          
+                copy_loop   0x000988    program     static                          
+            copy_one_byte   0x00098e    program     static                          
+             done_copying   0x00099c    program     static                          
+       ___return_lbl00002   0x0009b2    program     static                          
+                     done   0x0009b2    program     static                          
+              __string_19   0x0009b4    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_18   0x0009bf    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_17   0x0009ca    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_16   0x0009d6    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_15   0x0009e7    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_14   0x0009f3    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_13   0x0009fe    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_12   0x000a0a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_11   0x000a14    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __string_10   0x000a17    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __string_9   0x000a23    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __string_8   0x000a2a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               topRowChar   0x000a2b    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+            bottomRowChar   0x000a39    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+             brewTimeList   0x000a47    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username0   0x000a57    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username1   0x000a5d    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username2   0x000a62    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username3   0x000a69    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username4   0x000a70    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username5   0x000a77    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username6   0x000a7a    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                username7   0x000a80    program     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 FXD1616S   0x000a88    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                  DA1616S   0x000a9a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                   D1616S   0x000aaa    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                 D1616SOK   0x000ab4    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                D1616SNEG   0x000ab8    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                  D1616SX   0x000aca    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616s.asm
+                 FXD1616U   0x000ad4    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\fxd1616u.c
+                     loop   0x000ade    program     static                          
+                  endloop   0x000afa    program     static                          
+       ___return_lbl00000   0x000afe    program     static                          
+              Delay1KTCYx   0x000b00    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x000b0a    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+                    D1K_1   0x000b0c    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0010   0x000b10    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x000b16    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\d1ktcyx.asm
+            __zero_memory   0x000b20    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+               zero_block   0x000b2e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   loop_h   0x000b2e    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                compare_l   0x000b36    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   loop_l   0x000b38    program     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 _startup   0x000b40    program     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                     loop   0x000b50    program     static                          
+       ___return_lbl00001   0x000b5a    program     static                          
+               __config_0   0x300001    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_1   0x300002    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_2   0x300003    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_3   0x300005    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_4   0x300006    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_5   0x300008    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_6   0x300009    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_7   0x30000a    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_8   0x30000b    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               __config_9   0x30000c    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              __config_10   0x30000d    program     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
                      SIGN   0x000000       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-                __FPFLAGS   0x000001       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
             __FPFLAGSbits   0x000001       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
-            DelayCounter2   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd2.asm
-            DelayCounter1   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd1.asm
-               cupPresent   0x000060       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 plunging   0x000062       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 brewTime   0x000064       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-          motorResistance   0x000066       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              systemReady   0x000068       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                   userID   0x00006a       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                 ESPinput   0x00006c       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                        i   0x00006e       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-              mainMenuVar   0x000070       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-           maxPlungeSteps   0x000072       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-             makingCoffee   0x000074       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-               debugState   0x000076       data     extern C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
-                     prom   0x000078       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                curr_byte   0x00007b       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-               curr_entry   0x00007d       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-                 data_ptr   0x00007f       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
-               SSPMSKbits   0x000f77       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                __FPFLAGS   0x000001       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\cmath18.asm
+                 __AARGB7   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB3   0x000002       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB6   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB2   0x000003       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB5   0x000004       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB1   0x000004       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB4   0x000005       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                  __REMB0   0x000005       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB3   0x000006       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB2   0x000007       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB1   0x000008       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __AARGB0   0x000009       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                   __AEXP   0x00000a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\aarg.asm
+                 __BARGB3   0x00000b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB2   0x00000c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB1   0x00000d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                 __BARGB0   0x00000e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                   __BEXP   0x00000f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\math\barg.asm
+                  __tmp_0   0x000010       data     static D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+            DelayCounter1   0x000012       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\delays\delayd1.asm
+                usernames   0x000060       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+               cupPresent   0x000070       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 plunging   0x000072       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 brewTime   0x000074       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+          motorResistance   0x000076       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              systemReady   0x000078       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                   userID   0x00007a       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                 ESPinput   0x00007c       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                        i   0x00007e       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              mainMenuVar   0x000080       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           maxPlungeSteps   0x000082       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+              stepsToSeal   0x000084       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+             makingCoffee   0x000086       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           brewTimeAsChar   0x000088       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                   Buffer   0x000089       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+           brewTimeBuffer   0x000099       data     extern D:\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.c
+                     prom   0x00009b       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                curr_byte   0x00009e       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+               curr_entry   0x0000a0       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
+                 data_ptr   0x0000a2       data     static E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\startup\c018i.c
                    SSPMSK   0x000f77       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-               SLRCONbits   0x000f78       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+               SSPMSKbits   0x000f77       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    SLRCON   0x000f78       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  CM2CON1   0x000f79       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+               SLRCONbits   0x000f78       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CM2CON1bits   0x000f79       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  CM2CON1   0x000f79       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   CM2CON0   0x000f7a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CM2CON0bits   0x000f7a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  CM1CON0   0x000f7b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CM1CON0bits   0x000f7b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  CM1CON0   0x000f7b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  WPUBbits   0x000f7c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      WPUB   0x000f7c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     IOCB   0x000f7d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  IOCBbits   0x000f7d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     IOCB   0x000f7d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 ANSELbits   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     ANSEL   0x000f7e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ANSELH   0x000f7f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -481,42 +560,42 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                     PORTE   0x000f84       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  LATAbits   0x000f89       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      LATA   0x000f89       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     LATB   0x000f8a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  LATBbits   0x000f8a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     LATB   0x000f8a       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  LATCbits   0x000f8b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      LATC   0x000f8b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 LATDbits   0x000f8c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      LATD   0x000f8c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 LATDbits   0x000f8c       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      LATE   0x000f8d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  LATEbits   0x000f8d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 TRISAbits   0x000f92       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TRISA   0x000f92       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     DDRA   0x000f92       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  DDRAbits   0x000f92       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     DDRA   0x000f92       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                TRISBbits   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    TRISB   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      DDRB   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  DDRBbits   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    TRISB   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                TRISBbits   0x000f93       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                TRISCbits   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     DDRC   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 DDRCbits   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TRISC   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                TRISCbits   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 DDRCbits   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     DDRC   0x000f94       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                TRISDbits   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    TRISD   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      DDRD   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  DDRDbits   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    TRISD   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                TRISDbits   0x000f95       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     DDRE   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  DDREbits   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    TRISE   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 TRISEbits   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              OSCTUNEbits   0x000f9b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    TRISE   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     DDRE   0x000f96       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   OSCTUNE   0x000f9b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              OSCTUNEbits   0x000f9b       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  PIE1bits   0x000f9d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      PIE1   0x000f9d       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      PIR1   0x000f9e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  PIR1bits   0x000f9e       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 IPR1bits   0x000f9f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      IPR1   0x000f9f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 IPR1bits   0x000f9f       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      PIE2   0x000fa0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  PIE2bits   0x000fa0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      PIR2   0x000fa1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -527,18 +606,18 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                EECON1bits   0x000fa6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    EECON2   0x000fa7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    EEDATA   0x000fa8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    EEADR   0x000fa9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 EEADRbits   0x000fa9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                RCSTAbits   0x000fab       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    EEADR   0x000fa9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     RCSTA   0x000fab       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                RCSTAbits   0x000fab       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TXSTA   0x000fac       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 TXSTAbits   0x000fac       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TXREG   0x000fad       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     RCREG   0x000fae       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     SPBRG   0x000faf       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    SPBRGH   0x000fb0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    T3CON   0x000fb1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 T3CONbits   0x000fb1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    T3CON   0x000fb1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR3L   0x000fb2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR3H   0x000fb3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CVRCON2bits   0x000fb4       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -547,16 +626,16 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                    CVRCON   0x000fb5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               ECCP1ASbits   0x000fb6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   ECCP1AS   0x000fb6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              PWM1CONbits   0x000fb7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   PWM1CON   0x000fb7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  BAUDCON   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              BAUDCONbits   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  BAUDCTL   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              PWM1CONbits   0x000fb7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               BAUDCTLbits   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  BAUDCTL   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              BAUDCONbits   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  BAUDCON   0x000fb8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               PSTRCONbits   0x000fb9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   PSTRCON   0x000fb9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  CCP2CON   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               CCP2CONbits   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  CCP2CON   0x000fba       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     CCPR2   0x000fbb       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    CCPR2L   0x000fbb       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    CCPR2H   0x000fbc       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -569,17 +648,17 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                    ADCON2   0x000fc0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                ADCON1bits   0x000fc1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ADCON1   0x000fc1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                   ADCON0   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                ADCON0bits   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   ADCON0   0x000fc2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     ADRES   0x000fc3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ADRESL   0x000fc3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    ADRESH   0x000fc4       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               SSPCON2bits   0x000fc5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   SSPCON2   0x000fc5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                  SSPCON1   0x000fc6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               SSPCON1bits   0x000fc6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              SSPSTATbits   0x000fc7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                  SSPCON1   0x000fc6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   SSPSTAT   0x000fc7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              SSPSTATbits   0x000fc7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    SSPADD   0x000fc8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    SSPBUF   0x000fc9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 T2CONbits   0x000fca       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -590,22 +669,22 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                     T1CON   0x000fcd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR1L   0x000fce       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR1H   0x000fcf       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                 RCONbits   0x000fd0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      RCON   0x000fd0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                 RCONbits   0x000fd0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                WDTCONbits   0x000fd1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    WDTCON   0x000fd1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   HLVDCON   0x000fd2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              HLVDCONbits   0x000fd2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                LVDCONbits   0x000fd2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    LVDCON   0x000fd2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                   OSCCON   0x000fd3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              HLVDCONbits   0x000fd2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                OSCCONbits   0x000fd3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                   OSCCON   0x000fd3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                 T0CONbits   0x000fd5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     T0CON   0x000fd5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR0L   0x000fd6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     TMR0H   0x000fd7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-               STATUSbits   0x000fd8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    STATUS   0x000fd8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+               STATUSbits   0x000fd8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR2L   0x000fd9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      FSR2   0x000fd9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR2H   0x000fda       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -615,16 +694,16 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                  POSTINC2   0x000fde       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     INDF2   0x000fdf       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                       BSR   0x000fe0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                    FSR1L   0x000fe1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      FSR1   0x000fe1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                    FSR1L   0x000fe1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR1H   0x000fe2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    PLUSW1   0x000fe3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   PREINC1   0x000fe4       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  POSTDEC1   0x000fe5       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                  POSTINC1   0x000fe6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     INDF1   0x000fe7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                     WREG   0x000fe8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                         W   0x000fe8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                     WREG   0x000fe8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR0L   0x000fe9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      FSR0   0x000fe9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     FSR0H   0x000fea       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -635,8 +714,8 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                     INDF0   0x000fef       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   INTCON3   0x000ff0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
               INTCON3bits   0x000ff0       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-              INTCON2bits   0x000ff1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   INTCON2   0x000ff1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+              INTCON2bits   0x000ff1       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    INTCON   0x000ff2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                INTCONbits   0x000ff2       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                     PRODL   0x000ff3       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
@@ -647,14 +726,14 @@ Linker Map File - Created Fri Jan 12 15:51:39 2024
                    TBLPTR   0x000ff6       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   TBLPTRH   0x000ff7       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                   TBLPTRU   0x000ff8       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                      PCL   0x000ff9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                        PC   0x000ff9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                      PCL   0x000ff9       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    PCLATH   0x000ffa       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    PCLATU   0x000ffb       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                STKPTRbits   0x000ffc       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                    STKPTR   0x000ffc       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
-                      TOS   0x000ffd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      TOSL   0x000ffd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
+                      TOS   0x000ffd       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      TOSH   0x000ffe       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
                      TOSU   0x000fff       data     extern E:\c18v3.46\pic18-lt\cxx-framework\src\traditional\proc\p18f45k20.asm
 
