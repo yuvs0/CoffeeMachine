@@ -200,7 +200,15 @@ void WriteInt(int input){
 
 
 void stepperForward(void){
-	//Take one step
+	/*
+	function: stepperForward
+		
+	input:    none
+		
+	output:   none
+		
+	remarks:  moves the stepper motor by one step (does not set direction)
+	*/
 	STEP_PIN = 0;			
 	Delay1KTCYx(5);
 	STEP_PIN = 1;			
@@ -211,6 +219,15 @@ void stepperForward(void){
 //DEFINE PROGRAM SUBROUTINES---------------------------------------------------
 
 void drawWaterGraphic(int i){
+	/*
+	function: drawWaterGraphic
+		
+	input:    int (0-14)
+		
+	output:   none
+		
+	remarks:  Draws a picture of a cup containing an amount of liquid corresponding to the input value (0-14).
+	*/
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80);
 	WriteChar(0x00);
@@ -226,6 +243,15 @@ void drawWaterGraphic(int i){
 }
 
 void mainMenu(void){
+	/*
+	function: mainMenu
+		
+	input:    none
+		
+	output:   none
+		
+	remarks:  Updates the brew time and displays the user's name and brew time.
+	*/
 	mainMenuVar = 1;
 	brewTime = brewTimeList[userID];
 	WriteCmd ( CLEAR_SCREEN );    
@@ -239,6 +265,15 @@ void mainMenu(void){
 	
 }
 void resetSystem(void){
+	/*
+	function: resetSystem
+		
+	input:    none
+		
+	output:   none
+		
+	remarks:  Homes the plunger and resets the system
+	*/
 	mainMenuVar = 0;
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
@@ -252,6 +287,15 @@ void resetSystem(void){
 }
 
 void makeCoffee(void){
+	/*
+	function: makeCoffee
+		
+	input:    none
+		
+	output:   none
+		
+	remarks:  Seals the chamber, brews and stirs the coffee, and plunges. If called by the cleaning function, brewing and stirring does not occur.
+	*/
 	mainMenuVar = 0;
 	if(systemReady == 1){
 		plunging = 1;
@@ -293,6 +337,15 @@ void makeCoffee(void){
 }
 
 void clean(void){
+	/*
+	function: clean
+		
+	input:    none
+		
+	output:   none
+		
+	remarks:  Prompts users to set up the cleaning process and launches makeCoffee.
+	*/
 	mainMenuVar = 0;
 	while(CLEAN_BTN == 1){
 		//Wait for the user to let go of Clean, so it doesn't skip the instruction screen
