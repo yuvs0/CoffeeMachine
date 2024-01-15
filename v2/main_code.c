@@ -569,6 +569,7 @@ void InterruptServiceHigh(void)
 				break;
 		}
 	}
+	Delay1KTCYx(10);
 	// clear (reset) flag
     INTCONbits.INT0IF = 0;
 
