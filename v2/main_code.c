@@ -44,10 +44,10 @@ ON THE ESP32:
 #define CURSOR_RIGHT  	0b00000110
 
 //Define commands from ESP32
-#define CUP_FULL 15
-#define RESET 16
-#define ERROR_CUP_PRESENT_ON_STARTUP 17
-#define CUP_PRESENT 18
+#define CUP_FULL 0b00001111
+#define RESET 0b00010000
+#define ERROR_CUP_PRESENT_ON_STARTUP 0b00010001
+#define CUP_PRESENT 0b00010010
 
 #define DATA_PORT  LATD
 #define RS_PIN     PORTDbits.RD6
@@ -85,12 +85,12 @@ int brewTime = 0;
 int motorResistance = 0;
 int systemReady = 0;//Return to 0 after debugging!
 int userID = 0;
-int ESPinput = 0;	//Set to 0 before releasing
+char ESPinput = 0;	//Set to 0 before releasing
 int i = 0;//Used for a for loop later
 int mainMenuVar = 0;//Says if the code is at the main menu.
 int maxPlungeSteps = 150;//The number of steps the motor takes to get from sealed to fully plunged
 int stepsToSeal = 100;//Steps to take the plunger from Home to sealing the chamber
-int makingCoffee = 0;
+int makingCoffee = 1;	//Change this back later!
 char brewTimeAsChar = "";
 char Buffer[16];
 char brewTimeBuffer[2];
@@ -240,6 +240,7 @@ void drawWaterGraphic(int i){
 	WriteChar(bottomRowChar[i]);
 	WriteChar(bottomRowChar[i]);
 	WriteChar(0x02);
+	return;
 }
 
 void mainMenu(void){
@@ -257,11 +258,12 @@ void mainMenu(void){
 	WriteCmd ( CLEAR_SCREEN );    
 	SetAddr (0x80); 
 	WriteString("User: ");
-	WriteString(usernames[0]);//Write the user's name
+	WriteString(usernames[userID]);//Write the user's name
 	SetAddr (0xC0);//Go to second line
 	WriteString("Brew time: ");
-	WriteInt(brewTimeList[0]);
+	WriteInt(brewTimeList[userID]);
 	WriteString(" s");
+	return;
 	
 }
 void resetSystem(void){
@@ -283,7 +285,9 @@ void resetSystem(void){
 		stepperForward();	//Take one step
 	}
 	systemReady = 1;
+	makingCoffee = 0;
 	mainMenu();
+	return;
 }
 
 void makeCoffee(void){
@@ -334,6 +338,7 @@ void makeCoffee(void){
 			resetSystem();
 		}	
 	}
+	return;
 }
 
 void clean(void){
@@ -360,7 +365,7 @@ void clean(void){
 		//Wait until Clean is pressed again
 	}
 	makeCoffee();
-	
+	return;
 }
 
 void main (void)
@@ -380,10 +385,10 @@ void main (void)
    	LATA   = 0b00000000;	                	//Turns off all pins on port A
 	TRISB  = 0b00001111;                 		
    	LATB   = 0b11100000;	                	
-	TRISC  = 0b00000000;                 		
-   	LATC   = 0b00000000;	                	   	
+	TRISC  = 0b00011111;                 		//set lowest 5 bits of PORTC to inputs
+   	//LATC   = 0b00000000;	                	//cannot latch PORTC if it is an input
 	TRISD  = 0b00000000;                 		//sets PORTd
-   	LATD   = 0b00000000;	                	//turns off PORTd outputs, good start position   
+   	LATD   = 0b00000000;	                	//turns off PORTd outputs, good start position
 
 //SET UP INTERRUPTS-------------------------------------------------------------------------
 
@@ -468,7 +473,7 @@ void main (void)
 	WriteChar ( 0b00011111 );
 	WriteChar ( 0b00011111 );
 
-	WriteChar ( 0b00000000 );					// fifth character
+	WriteChar ( 0b00000000 );					// sixth character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
@@ -478,7 +483,7 @@ void main (void)
 	WriteChar ( 0b00011111 );
 
 
-	WriteChar ( 0b00000000 );					// fifth character
+	WriteChar ( 0b00000000 );					// seventh character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00011111 );
@@ -488,7 +493,7 @@ void main (void)
 	WriteChar ( 0b00011111 );
 
 
-	WriteChar ( 0b00000000 );					// fifth character
+	WriteChar ( 0b00000000 );					// eighth character
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00000000 );
 	WriteChar ( 0b00011111 );
@@ -497,7 +502,7 @@ void main (void)
 	WriteChar ( 0b00011111 );
 	WriteChar ( 0b00011111 );
 
-	WriteCmd  ( 0b00001100);	//display back on
+	WriteCmd  ( 0b00001100 );	//display back on
 	WriteCmd  ( CLEAR_SCREEN);     
 	
 	
@@ -538,12 +543,15 @@ void main (void)
 #pragma interrupt InterruptServiceHigh  // "interrupt" pragma also for high priority
 void InterruptServiceHigh(void)
 {
-	if(ESPinput<15){//If it's a water level update
+	//Delay1KTCYx(10);
+	ESPinput = PORTC;
+	
+	if(ESPinput<15 && ESPinput){//If it's a water level update
 		if(makingCoffee == 1){
 			drawWaterGraphic(ESPinput);
 		}
 	} else if(ESPinput>18){//If it's a user ID
-		userID = ESPinput;
+		userID = ESPinput - 19;
 		if(mainMenuVar == 1){
 			mainMenu();//If it's already on the main menu, reset the main menu to display the new user name.
 		}

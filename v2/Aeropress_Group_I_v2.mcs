@@ -2,7 +2,7 @@
 MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
 Version=1.0
 [File000]
-Location=C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\main_code.o
+Location=C:\Users\Yuvraj-New\OneDrive\Downloads\CoffeeMachine-main(1)\CoffeeMachine-main\v2\main_code.o
 Folder=Intermediary
 DeviceName=PIC18F45K20
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -15,7 +15,7 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File001]
-Location=C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\Aeropress_Group_I_v2.cof
+Location=C:\Users\Yuvraj-New\OneDrive\Downloads\CoffeeMachine-main(1)\CoffeeMachine-main\v2\Aeropress_Group_I_v2.cof
 Folder=Output
 DeviceName=PIC18F45K20
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
@@ -28,7 +28,7 @@ ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /
 TraceCmdString=
 DebugOptions=/z__MPLAB_DEBUG=1 /z__MPLAB_DEBUGGER_PK3=1 /z__ICD2RAM=1
 [File002]
-Location=C:\Users\dsec6\OneDrive - Loughborough University\Mechanics Y3\CW2_CW3\DSC006_Group I\MPLAB\v2\Aeropress_Group_I_v2.hex
+Location=C:\Users\Yuvraj-New\OneDrive\Downloads\CoffeeMachine-main(1)\CoffeeMachine-main\v2\Aeropress_Group_I_v2.hex
 Folder=Output
 DeviceName=PIC18F45K20
 LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
